@@ -18,7 +18,10 @@ class TodoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let todoItems = Preferences.todoItems {
+//        if let todoItems = Preferences.todoItems {
+//            self.items = todoItems
+//        }
+        if let todoItems = Documents.getTodoItems() {
             self.items = todoItems
         }
     }
@@ -34,7 +37,8 @@ class TodoListViewController: UITableViewController {
                 self.items.append(TodoItem(title: itemTitle, done : false))
                 self.tableView.reloadData()
                 
-                Preferences.todoItems = self.items
+                //Preferences.todoItems = self.items
+                Documents.saveTodoItems(self.items)
             }
         }))
         
@@ -75,7 +79,8 @@ extension TodoListViewController {
         
         items[indexPath.row].done = !items[indexPath.row].done
         
-        Preferences.todoItems = self.items
+        //Preferences.todoItems = self.items
+        Documents.saveTodoItems(self.items)
         
         tableView.deselectRow(at: indexPath, animated: true)
         
