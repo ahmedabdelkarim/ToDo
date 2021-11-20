@@ -12,7 +12,7 @@ class TodoListViewController: UITableViewController {
     
     
     //MARK: - Properties
-    var items = [String]()
+    var items = [TodoItem]()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -30,8 +30,8 @@ class TodoListViewController: UITableViewController {
         var itemTextField: UITextField?
         
         alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { action in
-            if let item = itemTextField?.text {
-                self.items.append(item)
+            if let itemTitle = itemTextField?.text {
+                self.items.append(TodoItem(title: itemTitle, done : false))
                 self.tableView.reloadData()
                 
                 Preferences.todoItems = self.items
@@ -57,8 +57,12 @@ extension TodoListViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoItemCell")!
         
+        let item = items[indexPath.row]
+        
         cell.textLabel?.text
-            = items[indexPath.row]
+            = item.title
+        
+        cell.accessoryType = item.done ? .checkmark : .none
         
         return cell
     }
@@ -66,5 +70,15 @@ extension TodoListViewController {
 
 //MARK: - UITableViewDelegate
 extension TodoListViewController {
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //var item = items[indexPath.row]
+        
+        items[indexPath.row].done = !items[indexPath.row].done
+        
+        Preferences.todoItems = self.items
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        tableView.reloadData()
+    }
 }

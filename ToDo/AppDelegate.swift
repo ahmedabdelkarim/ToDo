@@ -11,12 +11,15 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         // get path of simulator device
         print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true))
+        
+//        Preferences.asdArray = [Asd(name: "asd 1", age: 18), Asd(name: "asd 2", age: 22)]
+//        
+//        print(Preferences.asdArray!)
         
         return true
     }
