@@ -20,6 +20,7 @@ class Preferences {
                 return items
             }
             catch {
+                print(error)
                 return nil
             }
         }
@@ -28,7 +29,7 @@ class Preferences {
                 let data = try JSONEncoder().encode(newValue)
                 UserDefaults.standard.setValue(data, forKey: "TodoItems")
             }
-            catch {  }
+            catch { print(error) }
         }
     }
     

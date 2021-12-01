@@ -8,11 +8,11 @@
 import Foundation
 
 class Documents {
-    static let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+    private static let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     
     static func saveTodoItems(_ items: [TodoItem]) {
         let encoder = PropertyListEncoder()
-        let todoItemsDocument = documents!.appendingPathComponent("TodoItems.plist")
+        let todoItemsDocument = documents.appendingPathComponent("TodoItems.plist")
         
         do {
             let data = try encoder.encode(items)
@@ -25,7 +25,7 @@ class Documents {
     
     static func getTodoItems() -> [TodoItem]? {
         let decoder = PropertyListDecoder()
-        let todoItemsDocument = documents!.appendingPathComponent("TodoItems.plist")
+        let todoItemsDocument = documents.appendingPathComponent("TodoItems.plist")
         
         do {
             let data = try Data(contentsOf: todoItemsDocument)

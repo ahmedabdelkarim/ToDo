@@ -17,10 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // get path of simulator device
         print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true))
         
-//        Preferences.asdArray = [Asd(name: "asd 1", age: 18), Asd(name: "asd 2", age: 22)]
-//        
-//        print(Preferences.asdArray!)
-        
         return true
     }
 
